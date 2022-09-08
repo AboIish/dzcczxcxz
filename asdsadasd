@@ -70,3 +70,18 @@ end
 end
 end
 end)
+
+local ping 
+local Value 
+local pingValue 
+local PingNumber 
+
+game:GetService("RunService").RenderStepped:Connect(function()
+    
+     ping = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
+     Value = tostring(ping)
+     pingValue = Value:split(" ")
+     PingNumber = pingValue[1]
+    
+     DaHoodSettings.Prediction = PingNumber / 1000 + _G.PRED
+end)
