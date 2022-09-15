@@ -1,3 +1,5 @@
+_G.PRED = 0.00010
+
 local Aiming = loadstring(game:HttpGet("https://raw.githubusercontent.com/AustraIia/dzcczxcxz/main/fxgf"))()
 Aiming.TeamCheck(false)
 
@@ -13,9 +15,9 @@ local CurrentCamera = Workspace.CurrentCamera
 getgenv().DaHoodSettings = {
     SilentAim = true,
     AimLock = false,
-    Prediction = 0.14,
+    Prediction = 0.129145,
     AimLockKeybind = Enum.KeyCode.E,
-    SilentAimBind = "V"
+    SilentAimBind = "T"
 }
 
 function Aiming.Check()
@@ -69,4 +71,19 @@ DaHoodSettings.SilentAim = false
 end
 end
 end
+end)
+
+local ping 
+local Value 
+local pingValue 
+local PingNumber 
+
+game:GetService("RunService").RenderStepped:Connect(function()
+    
+     ping = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
+     Value = tostring(ping)
+     pingValue = Value:split(" ")
+     PingNumber = pingValue[1]
+    
+     DaHoodSettings.Prediction = PingNumber / 95000 + _G.PRED
 end)
